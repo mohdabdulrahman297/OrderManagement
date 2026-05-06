@@ -2,4 +2,7 @@
   <Project Path="Order.API/Order.API.csproj" />
   <Project Path="Order.ApplicationCore/Order.ApplicationCore.csproj" />
   <Project Path="Order.Infrastructure/Order.Infrastructure.csproj" />
+  <Project Path="Product.API/Product.API.csproj" Id="4d441051-851a-4307-9d86-0d200d198a1a" />
+  <Project Path="Product.ApplicationCore/Product.ApplicationCore.csproj" Id="fbf7a8f7-aaab-4550-8970-7058ebe39041" />
+  <Project Path="Product.Infrastructure/Product.Infrastructure.csproj" Id="56d091d8-c2a8-45b7-89e7-13165e6a9077" />
 </Solution>
