@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace Order.ApplicationCore.Entities
 {
@@ -14,7 +12,7 @@ namespace Order.ApplicationCore.Entities
         public decimal Price { get; set; }
         public float Discount { get; set; }
 
-        //belongs to one Order
-        public Order Order { get; set; } = null!;
+        [JsonIgnore]           // must be here
+        public Order? Order { get; set; }
     }
 }

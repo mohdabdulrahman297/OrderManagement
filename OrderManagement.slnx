@@ -5,4 +5,10 @@
   <Project Path="Product.API/Product.API.csproj" Id="4d441051-851a-4307-9d86-0d200d198a1a" />
   <Project Path="Product.ApplicationCore/Product.ApplicationCore.csproj" Id="fbf7a8f7-aaab-4550-8970-7058ebe39041" />
   <Project Path="Product.Infrastructure/Product.Infrastructure.csproj" Id="56d091d8-c2a8-45b7-89e7-13165e6a9077" />
+  <Project Path="Promotion.API/Promotion.API.csproj" Id="b660fa6b-2574-436c-8158-73bf1d3e7219" />
+  <Project Path="Promotion.ApplicationCore/Promotion.ApplicationCore.csproj" Id="4fa04e8d-3836-4c2d-9243-2d759ef4eac5" />
+  <Project Path="Promotion.Infrastructure/Promotion.Infrastructure.csproj" Id="3ddea2d2-39cc-4e7a-824c-35a17e0c7eed" />
+  <Project Path="Shipping.API/Shipping.API.csproj" Id="2745f644-19d5-4ada-a0e0-64b598796928" />
+  <Project Path="Shipping.ApplicationCore/Shipping.ApplicationCore.csproj" Id="c5ad2bce-3fda-4553-8e8d-f45fe9152e42" />
+  <Project Path="Shipping.Infrastructure/Shipping.Infrastructure.csproj" Id="3cfb3126-c994-404f-9840-9f76d670c955" />
 </Solution>

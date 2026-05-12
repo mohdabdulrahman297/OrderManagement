@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Order.ApplicationCore.Contracts.Services;
+using Order.ApplicationCore.Events;
 using OrderEntity = Order.ApplicationCore.Entities.Order;
+using Order.ApplicationCore.DTOs;
 
 namespace Order.API.Controllers;
 
@@ -9,10 +11,12 @@ namespace Order.API.Controllers;
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
+    private readonly IMessagePublisher _messagePublisher;
 
-    public OrderController(IOrderService orderService)
+    public OrderController(IOrderService orderService, IMessagePublisher messagePublisher)
     {
         _orderService = orderService;
+        _messagePublisher = messagePublisher;
     }
 
     // a. GET all Orders
@@ -76,5 +80,72 @@ public class OrderController : ControllerBase
 
         var updated = await _orderService.UpdateOrderAsync(order);
         return Ok(updated);
+    }
+
+
+    // f. POST - Complete Order & Publish to Azure Service Bus
+    [HttpPost("{id:int}/complete")]
+    public async Task<IActionResult> CompleteOrder(int id)
+    {
+        var order = await _orderService.GetOrderByIdAsync(id);
+        if (order is null)
+            return NotFound(new { message = $"Order {id} not found" });
+
+        var orderEvent = new OrderCompletedEvent
+        {
+            // Order Info
+            OrderId = order.Id,
+            OrderDate = order.OrderDate,
+            BillAmount = order.BillAmount,
+            OrderStatus = "Completed",
+
+            // Customer Info
+            CustomerId = order.CustomerId,
+            CustomerName = order.CustomerName,
+
+            // Payment Info
+            PaymentMethodId = order.PaymentMethodId,
+            PaymentName = order.PaymentName,
+
+            // Shipping Info
+            ShippingAddress = order.ShippingAddress,
+            ShippingMethod = order.ShippingMethod,
+
+            // Order Items
+            OrderDetails = order.OrderDetails.Select(d => new OrderDetailDto
+            {
+                ProductId = d.ProductId,
+                ProductName = d.ProductName,
+                Qty = d.Qty,
+                Price = d.Price,
+                Discount = d.Discount
+            }).ToList()
+        };
+
+        await _messagePublisher.PublishOrderCompletedAsync(orderEvent);
+
+        return Ok(new { message = $"Order {id} completed! Event published to Azure Service Bus ✅" });
+    }
+
+    // PATCH api/Order/{id}/shipping-status
+    [HttpPatch("{id:int}/shipping-status")]
+    public async Task<IActionResult> UpdateShippingStatus(int id, [FromBody] ShippingStatusUpdateDto dto)
+    {
+        if (id != dto.OrderId)
+            return BadRequest("Order ID in URL does not match request body.");
+
+        var order = await _orderService.GetOrderByIdAsync(id);
+        if (order is null)
+            return NotFound(new { message = $"Order {id} not found" });
+
+        order.OrderStatus = dto.Status;
+
+        var updated = await _orderService.UpdateOrderAsync(order);
+
+        return Ok(new
+        {
+            message = $"Order {id} shipping status updated to '{dto.Status}' ✅",
+            order = updated
+        });
     }
 }

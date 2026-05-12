@@ -5,12 +5,15 @@ using Order.Infrastructure.Data;
 using Order.Infrastructure.Repositories;
 using Order.Infrastructure.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // ── Register Services ──────────────────────────────────────
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Register ServiceBusPublisher
+builder.Services.AddScoped<IMessagePublisher, ServiceBusPublisher>();
 
 // EF Core - connect to SQL Server
 builder.Services.AddDbContext<OrderDbContext>(options =>
