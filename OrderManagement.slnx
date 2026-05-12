@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../eShopAuth/AuthService/AuthService.csproj" />
   <Project Path="Order.API/Order.API.csproj" />
   <Project Path="Order.ApplicationCore/Order.ApplicationCore.csproj" />
   <Project Path="Order.Infrastructure/Order.Infrastructure.csproj" />
