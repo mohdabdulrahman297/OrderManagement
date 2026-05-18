@@ -9,6 +9,9 @@
   <Project Path="Promotion.API/Promotion.API.csproj" Id="b660fa6b-2574-436c-8158-73bf1d3e7219" />
   <Project Path="Promotion.ApplicationCore/Promotion.ApplicationCore.csproj" Id="4fa04e8d-3836-4c2d-9243-2d759ef4eac5" />
   <Project Path="Promotion.Infrastructure/Promotion.Infrastructure.csproj" Id="3ddea2d2-39cc-4e7a-824c-35a17e0c7eed" />
+  <Project Path="Review.API/Review.API.csproj" Id="ab96d198-be41-4ff4-8575-c09cc7a2cd4d" />
+  <Project Path="Review.ApplicationCore/Review.ApplicationCore.csproj" Id="0ce8f370-7e30-491b-a35e-2c710e4b3cd8" />
+  <Project Path="Review.Infrastructure/Review.Infrastructure.csproj" Id="ed2beed2-589e-4a4a-8ba0-cd1d50650be6" />
   <Project Path="Shipping.API/Shipping.API.csproj" Id="2745f644-19d5-4ada-a0e0-64b598796928" />
   <Project Path="Shipping.ApplicationCore/Shipping.ApplicationCore.csproj" Id="c5ad2bce-3fda-4553-8e8d-f45fe9152e42" />
   <Project Path="Shipping.Infrastructure/Shipping.Infrastructure.csproj" Id="3cfb3126-c994-404f-9840-9f76d670c955" />
